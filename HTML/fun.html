@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<title>Personal Web Page</title>
+<head>
+    
+
+<!-- defining the page styles that we will use with the Javascript code-->
+<!--defining a box that going to hold the questions-->
+    <style>
+
+.hide {display:none}
+.show {display: block;text-align: left; color:black;opacity: 1;margin-left: 20px;font-size: }
+.question_block{ border-width: thin; border-style: solid; padding: 10px; background-color: lightgray; width: 95%;;margin-left: 25px;opacity: 0.5; font-family: "Roboto",Sans-serif; font-size: 25px; font-weight: bold; }
+
+    </style>
+    
+<!-- bootstrap files-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- starting the javascript coding-->
+<script type="text/javascript" language="JavaScript">
+    //defining the variables that we will use (score for counting the score, qno for holding the question number
+        score=0;
+        qno=1;
+    
+    //the function that is going to recieve the user choice for each question.
+function select(obj){
+    //it's goint to take the old value for the question number then add one to it then remove the old value and replace it with the new one
+    qnoElmn=document.getElementById("qno");
+    qno++;
+    contnode=document.createTextNode(qno);
+    qnoElmn.removeChild(qnoElmn.childNodes[0]);
+    qnoElmn.appendChild(contnode);
+    
+    
+    //taking the class of the user choise that can be either y (which means we are similar in thos thing) or n which means we are not in this particular question.
+    id = obj.getAttribute("class");    
+    
+    //if the class is y then add one to the score
+    if (id == "y"){
+		score++;
+      }
+    
+    //if all the five questions are answerd then enter to this function
+    if (qno==6){
+    //remove the question number
+    qnoElmn=document.getElementById("qno");
+    qnoElmn.removeChild(qnoElmn.childNodes[0]);
+    
+    // replace it with the sentance: You have completed the test!
+    finshElmn=document.getElementById("qestion_no");
+    finshtnode=document.createTextNode("You have completed the test!");
+    finshElmn.removeChild(finshElmn.childNodes[0]);
+    finshElmn.appendChild(finshtnode);
+        
+    // calcuating the percentage of the score and presnrt it
+    percentElmn=document.getElementById("precent");
+    percent=(score*20);
+    percentnode=document.createTextNode(percent);
+    percentElmn.appendChild(percentnode);
+    
+    // producing the analsis sentace accourding to the persentage
+    analsElmn=document.getElementById("nanlsis");        
+        
+        if(percent>=80){    
+            analsnode=document.createTextNode("we will have great time togather!");
+        }
+        
+        else if(percent<=40){
+            analsnode=document.createTextNode("we are so different, but we might fit togather somehow!");
+        }
+        
+        else{
+                     
+            analsnode=document.createTextNode("we could be good togather");
+        }
+        
+            analsElmn.appendChild(analsnode);
+     }
+ 
+    // in all cases, after answring a question, the code will hide it and show the next one
+    
+      obj.parentNode.parentNode.setAttribute("class","hide")
+      obj.parentNode.parentNode.nextSibling.nextSibling.setAttribute("class","show")
+}
+    
+    
+    
+    </script>
+
+<!--CSS styling file-->
+    <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    
+
+<body>
+
+<!--defining the header as a container that has two columns one has the size 1 and the other 11
+one has the logo and the other has the page title -->
+<div class="container">
+	
+    <div class="row">
+         <div class="col-xs-1">
+		
+            <div class="logo">
+                <img src="../img/logo.png" class="img-responsive"></div>
+        </div>
+        <div class="col-md-11 hidden-xs hidden-sm">
+        <div class="header2">Play a Game
+            </div>
+        
+        </div>
+        
+    </div>
+
+<!--starting with anther row in the same contaier that has the 'bread crumb'
+this row has only one colum with the saze 12-->
+    
+    <div class="row">
+        <div class="col-xs-12">
+        
+           <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="resume.html">Resume</a></li>
+            <li class="breadcrumb-item"><a href="skills.html">Skills</a></li>
+            <li class="breadcrumb-item"><a href="project.html">Projects</a></li>
+            <li class="breadcrumb-item"><a href="contact.html">Contact</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Play a game</li>
+            </ol>
+            </nav>
+        </div>
+    </div>
+
+
+<!--the thier row contains two columns
+one (size 10) has the main content of the page and the other one (size 2) has the links to the other pages-->
+    
+        <div class="row">    
+                <div class="col-md-10" >
+                    <div class="middle">
+                        <br>
+                       
+                     
+     <h1><center>SIMILARITY TEST</center></h1>
+
+    <div><br><br><br><h2>How similar are we?<p> You will have to answer 5 questions by just clicking on your choice. After you answer all the questions, you will get percentage of how similar we are, and we might become friends after that! :)</p></h2></div>
+    
+    
+    <br><br>
+    
+<!--here the question number will printed-->
+    <h4 id="qestion_no">You are in question number: <span id="qno">1</span></h4>
+
+<!--here the box that contains the questions starts-->
+
+                        <blockquote class="question_block">
+
+
+    <ul>
+<li class = "o"> What is your most favorite color among these four?
+	<ul>
+	<li class = "y" onclick=select(this)> Black</li>
+	<li class = "n" onclick=select(this)> Red</li>
+	<li class = "n" onclick=select(this)> Pink</li>
+	<li class = "n" onclick=select(this)> White</li>
+	</ul>
+  
+</li>
+
+<li class = "o" style="display:none;"> What is your favorite country among these four?
+	<ul>
+	<li class = "n" onclick=select(this)> Japan</li>
+	<li class = "n" onclick=select(this)> France</li>
+	<li class = "y" onclick=select(this)> USA</li>
+	<li class = "n" onclick=select(this)> UK</li>
+	</ul>
+</li>
+
+<li class = "o" style="display:none;"> What is your favorite place for contemplation?
+	<ul>
+	<li class = "n" onclick=select(this)> Your bedroom</li>
+	<li class = "y" onclick=select(this)> At the beach</li>
+	<li class = "n" onclick=select(this)> In a park</li>
+	<li class = "n" onclick=select(this)> While walking</li>
+	</ul>
+</li>
+
+<li class = "o" style="display:none;"> Who is the closest person to you?
+	<ul>
+	<li class = "n" onclick=select(this)> Your sibling</li>
+	<li class = "n" onclick=select(this)> Your friend</li>
+	<li class = "n" onclick=select(this)> Your father</li>
+	<li class = "y" onclick=select(this)> Your maother</li>
+	</ul>
+</li>
+        
+<li class = "o" style="display:none;"> What is your favorite show?
+	<ul>
+	<li class = "y" onclick=select(this)> Breaking Bad</li>
+	<li class = "n" onclick=select(this)> Game of Throns</li>
+	<li class = "n" onclick=select(this)> Dexter</li>
+	<li class = "n" onclick=select(this)> Stranger Things</li>
+	</ul>
+</li>
+        
+<li id="result" style="display:none;">
+    <ul>
+      <h5> You are <span id="precent"></span>% similer to me!
+      <br> That means <span id="nanlsis"></span></h5>
+    </ul>
+</li>
+
+</ul>
+                             
+</blockquote>
+          <br><br><br><br><br>
+        <h6> today's date is: <span id="today"></span></h6>
+        <script>
+            var d = new Date();
+            document.getElementById("today").innerHTML = d;
+        </script>
+
+
+   </div>
+        </div>
+            
+                        
+<!-- the strting of the second column that has the links of the other pages -->        
+
+
+            <div class="col-md-2">
+                <div class="right">
+            <nav>
+				<ul>
+                    <br><br><br>
+					<li><a href="index.html"> HOME </a></li>
+                    <br>
+					<li><a href="resume.html"> RESIUME </a></li>
+                    <br>
+					<li><a href="skills.html"> SKILLS </a></li>
+                    <br>
+					<li><a href="project.html"> PROJECTS </a></li>
+                    <br>
+					<li><a href="contact.html"> CONTACT</a></li>
+                    <br>
+                    <li class="active"><a href="fun.html"> PLAY A GAME</a></li>
+				</ul>
+			</nav>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+	
+</body>
+</html>
